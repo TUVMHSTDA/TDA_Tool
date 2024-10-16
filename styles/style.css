@@ -1,0 +1,99 @@
+/* 1. elements
+2. classes
+3. ids */
+
+/* elements */
+h3, h4, h5 {
+    text-align: center;
+    color: black;
+}
+
+header.st-emotion-cache-12fmjuu.ezrtsby2 {
+    display: none;
+}
+
+/* classes */
+.st-emotion-cache-gi0tri {
+    display: none !important;
+}
+
+.margin-top {
+    margin-top: 1rem;
+}
+
+.margin-bottom {
+    margin-bottom: 1rem;
+    /* margin: 1rem; */
+}
+
+
+.border {
+    border:1px solid #D6D6D9;
+    border-radius: 5px;
+}
+
+.bg_blue{
+    background-color: #A5C0E6;
+}
+
+.dark_blue {
+    background-color: #2F48A9;
+}
+
+.bg_grey{
+    background-color: #424242;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.row-widget stButton {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stSidebar .stTreeSelect {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;  /* Adjust this as needed */
+}
+
+.stTreeSelect .stTreeSelect__children {
+    padding-left: 20px;
+}
+
+.stTreeSelect__checkbox {
+    margin-right: 5px;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* Full viewport height */
+}
+
+
+/* ids */
+#topbar {
+    width: auto;
+}
+
+#td-assessment-tool-ver, #new-project {
+    padding: 15px;
+}
+
+#root {
+    margin: 1rem;
+}
+
+/* .nav {
+    background-color: white;
+    display: flex;
+    height: 0.01rem;
+} */

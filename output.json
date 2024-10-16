@@ -1,0 +1,156 @@
+[
+    {
+        "column_name": "Legal Manufacturer",
+        "update": true,
+        "question": "What is the Legal Manufacturer (name only)",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Single Registration Number",
+        "update": true,
+        "question": "What is the Single Registration Number (only return value)",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Authorized Representative",
+        "update": true,
+        "question": "What is the authorized representative (only return value)",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Product Location(s)",
+        "update": true,
+        "question": "What is the location",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Test Subject",
+        "update": true,
+        "question": "What is the project name or test subject",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "EMDN Code",
+        "update": true,
+        "question": "What is the EMDN code (only returns code)",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "MDN/MDA/MDS code",
+        "update": false,
+        "question": "What is the MDN/MDA/MDS code (only returns code)",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Basic UDI-Device Identifier",
+        "update": true,
+        "question": "What is the Basic UDI-DI (only returns value)",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Test Specifications",
+        "update": false,
+        "question": "What is the Test Specifications",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Product / Trade Name",
+        "update": true,
+        "question": "What is the product name (only returns product name)",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Intended purpose",
+        "update": true,
+        "question": "What is the intended purpose (only returns english)",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Intended User / Patient Population",
+        "update": true,
+        "question": "Who is target audience",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Principle of Operation",
+        "update": true,
+        "question": "What is the principle of operation of the product",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Qualification of Product",
+        "update": true,
+        "question": "What is the qualification of the product",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Risk Class",
+        "update": true,
+        "question": "Which class does the product belong (only returns class)",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Novel Features / Change to Predecessor",
+        "update": true,
+        "question": "What is the novel features",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Configuration and Variants of Device",
+        "update": true,
+        "question": "Give me the configuration of product",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Accessories and Device Combination",
+        "update": true,
+        "question": "What are the accessories provided with device",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "General Description",
+        "update": true,
+        "question": "Who is general description of the product",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Materials Incoporated",
+        "update": true,
+        "question": "What are the materials incorporated",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Technical Specifications",
+        "update": true,
+        "question": "What is the lifetime of the product",
+        "answer": [],
+        "file_location": ""
+    },
+    {
+        "column_name": "Similar Product(s)",
+        "update": true,
+        "question": "Is there any previous and similar generation of the product",
+        "answer": [],
+        "file_location": ""
+    }
+]

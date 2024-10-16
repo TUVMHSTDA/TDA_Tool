@@ -1,0 +1,6 @@
+streamlit==1.35.0
+pandas==2.2.1
+pymupdf==1.24.5
+transformers==4.41.2
+python-docx==1.1.2
+streamlit-tree-select==0.0.5
