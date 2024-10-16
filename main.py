@@ -246,13 +246,38 @@ if selected_page == "Tools":
                             return True
             return False
 
-        files_to_check = select_folder()
-        if files_to_check:
-            st.write("Performing OCR check...")
-            for file in files_to_check:
-                ocr_needed = needs_ocr([file])
-                status = "Failed" if ocr_needed else "Passed"
-                st.write(f"{file}: {status}")
+        # Initialize session state for folder path and file list
+        if "ocr_folder_path" not in st.session_state:
+            st.session_state.ocr_folder_path = ""
+        if "ocr_files" not in st.session_state:
+            st.session_state.ocr_files = []
+
+        # Button to select a folder
+        if st.button("Select Folder for OCR Check"):
+            selected_folder_path = select_folder()
+            st.session_state.ocr_folder_path = selected_folder_path  # Save folder path in session state
+
+            # Retrieve and display all files in the folder
+            file_list = [
+                file.path for file in os.scandir(selected_folder_path)
+                if file.is_file() and (file.path.endswith(".pdf") or file.path.endswith(".docx"))
+            ]
+            st.session_state.ocr_files = file_list
+
+        # Display the selected folder path
+        st.text_input("Selected Folder Path", value=st.session_state.ocr_folder_path, disabled=True)
+
+        # Display files in the folder and OCR check status
+        if st.session_state.ocr_files:
+            st.write("Performing OCR check on the files in the selected folder:")
+            for file_path in st.session_state.ocr_files:
+                # Check if OCR is needed for each file
+                ocr_needed = needs_ocr(file_path)
+                status_message = "Failed" if ocr_needed else "Passed"
+                status_color = "red" if ocr_needed else "green"
+
+                # Display each file's path and OCR status
+                st.markdown(f"- **{file_path}**: <span style='color:{status_color}'>{status_message}</span>", unsafe_allow_html=True)
 
     # CEAR Export Tool
     elif tool_option == "CEAR Export":
