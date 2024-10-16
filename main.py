@@ -101,6 +101,30 @@ selected_page = st.sidebar.selectbox(
     ("Home", "Tools", "Settings")
 )
 
+# Replace Tkinter's folder selector with Streamlit's file uploader
+def select_folder():
+    uploaded_files = st.file_uploader("Upload PDF or DOCX Files", type=["pdf", "docx"], accept_multiple_files=True)
+    if uploaded_files:
+        return [file.name for file in uploaded_files]  # Return a list of file names
+
+# Modify file tree logic for uploaded files
+def file_tree(files):
+    nodes = [{"label": file, "value": file} for file in files]
+    selected = tree_select(nodes, only_leaf_checkboxes=True)
+    return selected
+
+# PDF extraction logic using Streamlit's file_uploader
+def needs_ocr(file_list):
+    for file in file_list:
+        if file.name.endswith(".pdf"):
+            doc = pymupdf.open(file)
+            for page_num in range(len(doc)):
+                page = doc.load_page(page_num)
+                text = page.get_text()
+                if not text.strip():
+                    return True
+    return False
+
 # Define Tools sub-options when "Tools" is selected
 if selected_page == "Tools":
     tool_option = st.sidebar.selectbox(
@@ -112,25 +136,14 @@ if selected_page == "Tools":
     if tool_option == "TDAR Export":
         st.title("TDAR Export")
         
-        # function to show native file system - completed
-        def select_folder():
-            root = tk.Tk()
-            root.wm_attributes('-topmost', 1)
-            root.withdraw()
-            folder_path = filedialog.askdirectory(master=root)
-            root.destroy()
-            return folder_path
-
-        def needs_ocr(pdf_pathlist):
-            for pdf_path in pdf_pathlist:
-                if pdf_path.endswith(".pdf") or pdf_path.endswith(".docx"):
-                    doc = pymupdf.open(pdf_path)
-                    for page_num in range(len(doc)):
-                        page = doc.load_page(page_num)
-                        text = page.get_text()
-                        if not text.strip():  # No text found on the page
-                            return True
-            return False
+        if tool_option == "TDAR Export":
+            st.title("TDAR Export")
+            selected_files = select_folder()  # Use Streamlit file uploader
+            if selected_files:
+                if not needs_ocr(selected_files):
+                    st.success("Files are ready for extraction!")
+                else:
+                    st.warning("OCR is needed for some files.")
 
         def file_tree(path):
             stack = [path]
@@ -307,61 +320,16 @@ if selected_page == "Tools":
 
     # OCR Check Tool
     elif tool_option == "OCR Check":
-        # function to show native file system - completed
-        def select_folder():
-            root = tk.Tk()
-            root.wm_attributes('-topmost', 1)
-            root.withdraw()
-            folder_path = filedialog.askdirectory(master=root)
-            root.destroy()
-            return folder_path
-
-        # Function to check if OCR is needed for a single file
-        def needs_ocr(file_path):
-            if file_path.endswith(".pdf") or file_path.endswith(".docx"):
-                doc = pymupdf.open(file_path)
-                for page_num in range(len(doc)):
-                    page = doc.load_page(page_num)
-                    text = page.get_text()
-                    if not text.strip():  # No text found on the page
-                        return True
-            return False
-
         st.title("OCR Check Tool")
         st.write("Select a folder to perform OCR checks on the files within it.")
 
-        # Initialize session state for folder path and file list
-        if "ocr_folder_path" not in st.session_state:
-            st.session_state.ocr_folder_path = ""
-        if "ocr_files" not in st.session_state:
-            st.session_state.ocr_files = []
-
-        # Button to select a folder
-        if st.button("Select Folder for OCR Check"):
-            selected_folder_path = select_folder()
-            st.session_state.ocr_folder_path = selected_folder_path  # Save folder path in session state
-
-            # Retrieve and display all files in the folder
-            file_list = [
-                file.path for file in os.scandir(selected_folder_path)
-                if file.is_file() and (file.path.endswith(".pdf") or file.path.endswith(".docx"))
-            ]
-            st.session_state.ocr_files = file_list
-
-        # Display the selected folder path
-        st.text_input("Selected Folder Path", value=st.session_state.ocr_folder_path, disabled=True)
-
-        # Display files in the folder and OCR check status
-        if st.session_state.ocr_files:
-            st.write("Performing OCR check on the files in the selected folder:")
-            for file_path in st.session_state.ocr_files:
-                # Check if OCR is needed for each file
-                ocr_needed = needs_ocr(file_path)
-                status_message = "Failed" if ocr_needed else "Passed"
-                status_color = "red" if ocr_needed else "green"
-
-                # Display each file's path and OCR status
-                st.markdown(f"- **{file_path}**: <span style='color:{status_color}'>{status_message}</span>", unsafe_allow_html=True)
+        files_to_check = select_folder()
+        if files_to_check:
+            st.write("Performing OCR check...")
+            for file in files_to_check:
+                ocr_needed = needs_ocr([file])
+                status = "Failed" if ocr_needed else "Passed"
+                st.write(f"{file}: {status}")
 
     # CEAR Export Tool
     elif tool_option == "CEAR Export":
