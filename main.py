@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 import os
 import json
-import tkinter as tk
-from tkinter import filedialog
+# import tkinter as tk
+# from tkinter import filedialog
 from streamlit_tree_select import tree_select
 from pdf_extractor import extract_txt_list    # Daniel's script
 # from extract_fields import main as extract    # Austin's script
