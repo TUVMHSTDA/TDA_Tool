@@ -10,80 +10,6 @@ from pdf_extractor import extract_txt_list    # Daniel's script
 from export_data import main as export_td
 import pymupdf
 
-# # Page configuration
-# st.set_page_config(
-#     page_title="TDA",
-#     page_icon="🧊",
-#     layout="wide"
-# )
-
-# # Define navigation items in a horizontal row
-# col1, col2, col3 = st.columns(3)
-
-# with col1:
-#     if st.button("Home"):
-#         st.session_state.page = "Home"
-
-# with col2:
-#     if st.button("Tools"):
-#         st.session_state.page = "Tools"
-
-# with col3:
-#     if st.button("Settings"):
-#         st.session_state.page = "Settings"
-
-# # Initialize the page in session state
-# if "page" not in st.session_state:
-#     st.session_state.page = "Home"
-
-# # Tools drop-down only appears if 'Tools' is selected
-# if st.session_state.page == "Tools":
-#     tool_option = st.selectbox(
-#         "Select Tool",
-#         ("PDF Extraction", "OCR Check", "CERA Export")
-#     )
-
-# # Main content based on selected page
-# if st.session_state.page == "Home":
-#     # Center the title and image
-#     st.markdown(
-#         """
-#         <style>
-#         .center {
-#             display: flex;
-#             flex-direction: column;
-#             justify-content: center;
-#             align-items: center;
-#             height: 10vh;
-#         }
-#         </style>
-#         """,
-#         unsafe_allow_html=True,
-#     )
-#     with st.container():
-#         st.markdown('<div class="center">', unsafe_allow_html=True)
-#         st.title("MHS TDA")
-#         st.image(r"C:/Users/Austin/Downloads/TDAenv/edited.png", width=300)
-#         st.markdown('</div>', unsafe_allow_html=True)
-
-# elif st.session_state.page == "Tools":
-#     if tool_option == "PDF Extraction":
-#         # Add PDF Extraction logic here
-#         st.write("PDF Extraction Tool Selected")
-
-#     elif tool_option == "OCR Check":
-#         # Add OCR Check logic here
-#         st.write("OCR Check Tool Selected")
-
-#     elif tool_option == "CERA Export":
-#         # Add CERA Export logic here
-#         st.write("CERA Export Tool Selected")
-
-# elif st.session_state.page == "Settings":
-#     st.title("Settings")
-#     st.write("Configure your application settings here.")
-
-
 # Page configuration
 st.set_page_config(
     page_title="TDA",
@@ -101,227 +27,224 @@ selected_page = st.sidebar.selectbox(
     ("Home", "Tools", "Settings")
 )
 
-# Replace Tkinter's folder selector with Streamlit's file uploader
-def select_folder():
-    uploaded_files = st.file_uploader("Upload PDF or DOCX Files", type=["pdf", "docx"], accept_multiple_files=True)
-    if uploaded_files:
-        return [file.name for file in uploaded_files]  # Return a list of file names
-
-# Modify file tree logic for uploaded files
-def file_tree(files):
-    nodes = [{"label": file, "value": file} for file in files]
-    selected = tree_select(nodes, only_leaf_checkboxes=True)
-    return selected
-
-# PDF extraction logic using Streamlit's file_uploader
-def needs_ocr(file_list):
-    for file in file_list:
-        if file.name.endswith(".pdf"):
-            doc = pymupdf.open(file)
-            for page_num in range(len(doc)):
-                page = doc.load_page(page_num)
-                text = page.get_text()
-                if not text.strip():
-                    return True
-    return False
-
 # Define Tools sub-options when "Tools" is selected
 if selected_page == "Tools":
     tool_option = st.sidebar.selectbox(
         "Select Tool",
-        ("TDAR Export", "OCR Check", "CEAR Export")
+        ("OCR Check", "CEAR Export")
     )
 
-    # PDF Extraction Tool
-    if tool_option == "TDAR Export":
-        st.title("TDAR Export")
-        
-        if tool_option == "TDAR Export":
-            st.title("TDAR Export")
-            selected_files = select_folder()  # Use Streamlit file uploader
-            if selected_files:
-                if not needs_ocr(selected_files):
-                    st.success("Files are ready for extraction!")
-                else:
-                    st.warning("OCR is needed for some files.")
+    # # PDF Extraction Tool
+    # if tool_option == "TDAR Export":
+    #     st.title("TDAR Export")
+    #         selected_files = select_folder()  # Use Streamlit file uploader
+    #         if selected_files:
+    #             if not needs_ocr(selected_files):
+    #                 st.success("Files are ready for extraction!")
+    #             else:
+    #                 st.warning("OCR is needed for some files.")
 
-        def file_tree(path):
-            stack = [path]
-            result = []
-            parent_map = {path: result}
+    #     def file_tree(path):
+    #         stack = [path]
+    #         result = []
+    #         parent_map = {path: result}
 
-            while stack:
-                current_path = stack.pop()
-                current_nodes = parent_map[current_path]
+    #         while stack:
+    #             current_path = stack.pop()
+    #             current_nodes = parent_map[current_path]
 
-                try:
-                    for entry in os.scandir(current_path):
-                        if entry.is_dir():
-                            node = {
-                                "label": entry.name,
-                                "value": os.path.normpath(entry.path),
-                                "children": []
-                            }
-                            current_nodes.append(node)
-                            stack.append(entry.path)
-                            parent_map[entry.path] = node["children"]
-                        else:
-                            if entry.path.endswith(".pdf") or entry.path.endswith(".docx"):
-                                node = {
-                                    "label": entry.name,
-                                    "value": os.path.normpath(entry.path)
-                                }
-                                current_nodes.append(node)
-                except:
-                    pass
+    #             try:
+    #                 for entry in os.scandir(current_path):
+    #                     if entry.is_dir():
+    #                         node = {
+    #                             "label": entry.name,
+    #                             "value": os.path.normpath(entry.path),
+    #                             "children": []
+    #                         }
+    #                         current_nodes.append(node)
+    #                         stack.append(entry.path)
+    #                         parent_map[entry.path] = node["children"]
+    #                     else:
+    #                         if entry.path.endswith(".pdf") or entry.path.endswith(".docx"):
+    #                             node = {
+    #                                 "label": entry.name,
+    #                                 "value": os.path.normpath(entry.path)
+    #                             }
+    #                             current_nodes.append(node)
+    #             except:
+    #                 pass
 
-            nodes = result
-            selected = tree_select(nodes, only_leaf_checkboxes=True)
-            print(selected)
-            return selected
+    #         nodes = result
+    #         selected = tree_select(nodes, only_leaf_checkboxes=True)
+    #         print(selected)
+    #         return selected
 
-        def show_td_table():
-            output = {}
+    #     def show_td_table():
+    #         output = {}
 
-            # Opening JSON file
-            f = open('./output.json')
+    #         # Opening JSON file
+    #         f = open('./output.json')
             
-            data = json.load(f)
+    #         data = json.load(f)
             
-            for i in range(len(data)):
-                output[data[i]["column_name"]] = data[i]["answer"]
+    #         for i in range(len(data)):
+    #             output[data[i]["column_name"]] = data[i]["answer"]
             
-            f.close()
+    #         f.close()
 
-            subsection = list(output.keys())
-            extracted_info = list(output.values())
-            selection = []
-            for i in enumerate(subsection):
-                selection.append(False)
-            file_location = ""
+    #         subsection = list(output.keys())
+    #         extracted_info = list(output.values())
+    #         selection = []
+    #         for i in enumerate(subsection):
+    #             selection.append(False)
+    #         file_location = ""
             
-            d = {"Sub-Section": subsection, 
-                 "Extracted Data Points": extracted_info, 
-                 "Selection": selection, 
-                 "File Location": file_location}
-            df = (pd.DataFrame(data=d)).explode("Extracted Data Points")
+    #         d = {"Sub-Section": subsection, 
+    #              "Extracted Data Points": extracted_info, 
+    #              "Selection": selection, 
+    #              "File Location": file_location}
+    #         df = (pd.DataFrame(data=d)).explode("Extracted Data Points")
 
-            return df
+    #         return df
 
-        def run_pdf_extraction():
-            try:
-                with open(r'./styles/style.css') as f:
-                    css = f.read()
-                st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+    #     def run_pdf_extraction():
+    #         try:
+    #             with open(r'./styles/style.css') as f:
+    #                 css = f.read()
+    #             st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
-                col_file, col_table = st.columns([0.3, 0.7], gap="medium")
+    #             col_file, col_table = st.columns([0.3, 0.7], gap="medium")
 
-                with col_file:
-                    with st.container():
+    #             with col_file:
+    #                 with st.container():
 
-                        selected_folder_path = st.session_state.get("folder_path", None)
-                        if 'show' not in st.session_state:
-                            st.session_state.show = False
-                        if 'checked' not in st.session_state:
-                            st.session_state.checked = False
-                        if 'disable' not in st.session_state:
-                            st.session_state.disable = True
-                        if 'clicked' not in st.session_state:
-                            st.session_state.clicked = False
-                        if 'run' not in st.session_state:
-                            st.session_state.run = 0
+    #                     selected_folder_path = st.session_state.get("folder_path", None)
+    #                     if 'show' not in st.session_state:
+    #                         st.session_state.show = False
+    #                     if 'checked' not in st.session_state:
+    #                         st.session_state.checked = False
+    #                     if 'disable' not in st.session_state:
+    #                         st.session_state.disable = True
+    #                     if 'clicked' not in st.session_state:
+    #                         st.session_state.clicked = False
+    #                     if 'run' not in st.session_state:
+    #                         st.session_state.run = 0
 
-                        if selected_folder_path == None:
-                            project_name = "New Project"
-                        else:
-                            project_name = os.path.basename(selected_folder_path)
+    #                     if selected_folder_path == None:
+    #                         project_name = "New Project"
+    #                     else:
+    #                         project_name = os.path.basename(selected_folder_path)
                         
-                        st.markdown(f'''
-                                    <div class='margin-bottom bg_blue border'>
-                                        <h4 class='margin-top margin-bottom bg_blue'>{project_name}</h4>
-                                    </div>
-                                    ''', unsafe_allow_html=True)
+    #                     st.markdown(f'''
+    #                                 <div class='margin-bottom bg_blue border'>
+    #                                     <h4 class='margin-top margin-bottom bg_blue'>{project_name}</h4>
+    #                                 </div>
+    #                                 ''', unsafe_allow_html=True)
 
-                        buttoncol1, buttoncol2, buttoncol3 = st.columns([0.5, 0.5, 0.5], gap="small")
+    #                     buttoncol1, buttoncol2, buttoncol3 = st.columns([0.5, 0.5, 0.5], gap="small")
 
-                        with buttoncol1:    
-                            folder_select_button = st.button(":heavy_plus_sign: Select folder")
+    #                     with buttoncol1:    
+    #                         folder_select_button = st.button(":heavy_plus_sign: Select folder")
                             
-                            if folder_select_button:
-                                selected_folder_path = select_folder()
-                                st.session_state.folder_path = selected_folder_path
-                                st.session_state.show = False
-                                st.session_state.clicked = False
-                                st.rerun()
+    #                         if folder_select_button:
+    #                             selected_folder_path = select_folder()
+    #                             st.session_state.folder_path = selected_folder_path
+    #                             st.session_state.show = False
+    #                             st.session_state.clicked = False
+    #                             st.rerun()
 
-                        if selected_folder_path != None:
-                            selected_files = file_tree(selected_folder_path)
+    #                     if selected_folder_path != None:
+    #                         selected_files = file_tree(selected_folder_path)
 
-                            if selected_files["checked"]:
-                                if not needs_ocr(selected_files["checked"]):
-                                    st.session_state.checked = True
-                                    st.session_state.disable = False
+    #                         if selected_files["checked"]:
+    #                             if not needs_ocr(selected_files["checked"]):
+    #                                 st.session_state.checked = True
+    #                                 st.session_state.disable = False
 
-                                    if st.session_state.clicked == True:
-                                        st.session_state.disable = True
+    #                                 if st.session_state.clicked == True:
+    #                                     st.session_state.disable = True
                             
-                            else:
-                                st.session_state.checked = False
-                                st.session_state.disable = True
+    #                         else:
+    #                             st.session_state.checked = False
+    #                             st.session_state.disable = True
 
-                        with buttoncol2:
-                            st.button(":arrow_down_small: Filter files")
+    #                     with buttoncol2:
+    #                         st.button(":arrow_down_small: Filter files")
 
-                        with buttoncol3:
-                            extract_details = st.button(":outbox_tray: Extract details", disabled=st.session_state.disable)
+    #                     with buttoncol3:
+    #                         extract_details = st.button(":outbox_tray: Extract details", disabled=st.session_state.disable)
                             
-                            if extract_details:
-                                st.session_state.show = True
-                                st.session_state.clicked = True
-                                st.rerun()
+    #                         if extract_details:
+    #                             st.session_state.show = True
+    #                             st.session_state.clicked = True
+    #                             st.rerun()
 
-                with col_table:
-                    with st.container():
-                        if st.session_state.show and st.session_state.checked:
-                            extract_txt_list(selected_files["checked"])
+    #             with col_table:
+    #                 with st.container():
+    #                     if st.session_state.show and st.session_state.checked:
+    #                         extract_txt_list(selected_files["checked"])
 
-                            header = "TD ASSESSMENT [Tool Ver.]"
-                            st.markdown(f'''
-                                        <div class='margin-bottom bg_blue border'>
-                                            <h5>{header}</h5>
-                                        </div>
-                                        ''', unsafe_allow_html=True)
+    #                         header = "TD ASSESSMENT [Tool Ver.]"
+    #                         st.markdown(f'''
+    #                                     <div class='margin-bottom bg_blue border'>
+    #                                         <h5>{header}</h5>
+    #                                     </div>
+    #                                     ''', unsafe_allow_html=True)
                             
-                            with st.container():
-                                df = show_td_table()
-                                edited_df = st.data_editor(
-                                                df, 
-                                                column_config={
-                                                "Selection": st.column_config.CheckboxColumn(
-                                                    "Selection",
-                                                    default=False
-                                                )},
-                                                hide_index=True, 
-                                                disabled=["Sub-Section"], 
-                                                use_container_width=True)
+    #                         with st.container():
+    #                             df = show_td_table()
+    #                             edited_df = st.data_editor(
+    #                                             df, 
+    #                                             column_config={
+    #                                             "Selection": st.column_config.CheckboxColumn(
+    #                                                 "Selection",
+    #                                                 default=False
+    #                                             )},
+    #                                             hide_index=True, 
+    #                                             disabled=["Sub-Section"], 
+    #                                             use_container_width=True)
 
-                            subcol1, subcol2, subcol3 = st.columns([0.3, 1, 0.2])
-                            with subcol3:
-                                filename = 'edited_data.json'
+    #                         subcol1, subcol2, subcol3 = st.columns([0.3, 1, 0.2])
+    #                         with subcol3:
+    #                             filename = 'edited_data.json'
                                 
-                                if st.button("Export"):
-                                    edited_df.to_json(filename, orient="records")
-                                    export_td()
+    #                             if st.button("Export"):
+    #                                 edited_df.to_json(filename, orient="records")
+    #                                 export_td()
 
-            except TypeError:
-                pass
+    #         except TypeError:
+    #             pass
 
-        run_pdf_extraction()
+    #     run_pdf_extraction()
 
     # OCR Check Tool
-    elif tool_option == "OCR Check":
+    if tool_option == "OCR Check":
         st.title("OCR Check Tool")
         st.write("Select a folder to perform OCR checks on the files within it.")
+
+        # Replace Tkinter's folder selector with Streamlit's file uploader
+        def select_folder():
+            uploaded_files = st.file_uploader("Upload PDF or DOCX Files", type=["pdf", "docx"], accept_multiple_files=True)
+            if uploaded_files:
+                return [file.name for file in uploaded_files]  # Return a list of file names
+
+        # Modify file tree logic for uploaded files
+        def file_tree(files):
+            nodes = [{"label": file, "value": file} for file in files]
+            selected = tree_select(nodes, only_leaf_checkboxes=True)
+            return selected
+
+        # PDF extraction logic using Streamlit's file_uploader
+        def needs_ocr(file_list):
+            for file in file_list:
+                if file.name.endswith(".pdf"):
+                    doc = pymupdf.open(file)
+                    for page_num in range(len(doc)):
+                        page = doc.load_page(page_num)
+                        text = page.get_text()
+                        if not text.strip():
+                            return True
+            return False
 
         files_to_check = select_folder()
         if files_to_check:
