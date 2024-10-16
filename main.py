@@ -93,7 +93,7 @@ st.set_page_config(
 
 # Add icon to the sidebar
 with st.sidebar:
-    st.image(r"C:/Users/Austin/Downloads/TDAenv/edited.png", width=150)  # Adjust size as needed
+    st.image("./edited.png", width=150)  # Adjust size as needed
 
 # Define navigation options
 selected_page = st.sidebar.selectbox(
@@ -377,7 +377,7 @@ if selected_page == "Tools":
 # Home Page
 elif selected_page == "Home":
     # Display the TUV SUD logo
-    st.image(r"C:/Users/Austin/Downloads/TDAenv/edited.png", width=300)  # Adjust the path and size as needed
+    st.image("./edited.png", width=300)  # Adjust the path and size as needed
     st.title("MHS TDA Tools")
 
 # Settings Page
