@@ -5,6 +5,11 @@ from streamlit_tree_select import tree_select
 from pdf_extractor import extract_txt_list  # Daniel's script
 from export_data import main as export_td
 import fitz  # pymupdf
+from PIL import Image
+
+# Load the uploaded image
+image_path = "./edited.png"
+uploaded_image = Image.open(image_path)
 
 # Page configuration
 st.set_page_config(
@@ -112,7 +117,7 @@ elif selected_page == "Home":
     st.markdown(
         """
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-            <img src="./edited.png" alt="Logo" width="300">
+            <img src=image_path alt="Logo" width="300">
             <h1 style="text-align: center;">MHS TDA Tools</h1>
         </div>
         """,
