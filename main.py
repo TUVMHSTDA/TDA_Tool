@@ -120,7 +120,7 @@ elif selected_page == "Home":
     st.markdown(
         """
         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-            <h4>A tool that enables TD assessors to minimize mundane tasks, allowing them to focus more on their areas of expertise.</h4>
+            <h6>A tool that enables TD assessors to minimize mundane tasks, allowing them to focus more on their areas of expertise.</h6>
         </div>
         """,
         unsafe_allow_html=True)
