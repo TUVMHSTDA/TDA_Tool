@@ -114,10 +114,20 @@ if selected_page == "Tools":
 
 # Home Page
 elif selected_page == "Home":
+    # Create a centered layout
     st.markdown(
         """
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-            <img src=image_path alt="Logo" width="300">
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Display the image first
+    st.image(uploaded_image, width=300)
+    
+    # Add title after the image
+    st.markdown(
+        """
             <h1 style="text-align: center;">MHS TDA Tools</h1>
         </div>
         """,
