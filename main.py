@@ -6,13 +6,6 @@ from pdf_extractor import extract_txt_list  # Daniel's script
 from export_data import main as export_td
 import fitz  # pymupdf
 
-# Load CSS file
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-local_css("./styles/homepgStyle.css")  # Load custom CSS
-
 # Page configuration
 st.set_page_config(
     page_title="TDA",
@@ -116,10 +109,8 @@ if selected_page == "Tools":
 
 # Home Page
 elif selected_page == "Home":
-    st.markdown("<div class='center-content'>", unsafe_allow_html=True)
-    st.image("./edited.png", width=300, class_="home-image")
-    st.markdown("<h1 class='title'>MHS TDA Tools</h1>", unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.image("./edited.png", width=300)
+    st.title("MHS TDA Tools")
 
 # Settings Page
 elif selected_page == "Settings":
