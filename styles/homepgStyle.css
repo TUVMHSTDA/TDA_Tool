@@ -1,0 +1,23 @@
+/* imageStyle.css */
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Optional styling for title and image */
+.title {
+    font-size: 2.5em;
+    color: #333;
+    margin-top: 20px;
+}
+
+.home-image {
+    max-width: 300px;
+    width: 100%;
+    margin-bottom: 20px;
+}
