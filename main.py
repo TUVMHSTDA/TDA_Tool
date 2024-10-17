@@ -109,17 +109,17 @@ if selected_page == "Tools":
 
 # Home Page
 elif selected_page == "Home":
-    col1, col2, col3, col4 = st.columns([1, 1, 2, 1])
+    col1, col2, col3, col4, col5= st.columns([1, 1, 2, 1, 1])
 
     with col3:
         st.image("./edited.png", width=300)
-        st.title("MHS TDA Tools")
-        st.write("by TÜV SÜD")
-        st.write("")
 
     st.markdown(
         """
         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <h1>MHS TDA Tools</h1>
+            <h6>by TÜV SÜD</h6>
+            <h6></h6>
             <h5>A tool that enables TD assessors to minimize mundane tasks, allowing them to focus more on their areas of expertise.</h5>
         </div>
         """,
