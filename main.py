@@ -114,6 +114,10 @@ elif selected_page == "Home":
     with col3:
         st.image("./edited.png", width=300)
         st.title("MHS TDA Tools")
+        st.write("by TÜV SÜD")
+        st.write("")
+        st.title("Transform Your Assessments, Let Efficiency Flow"
+        st.title("          Automate the Routine, Focus on What You Know!")
 
 # Settings Page
 elif selected_page == "Settings":
