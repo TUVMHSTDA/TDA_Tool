@@ -116,6 +116,7 @@ elif selected_page == "Home":
         st.title("MHS TDA Tools")
         st.write("by TÜV SÜD")
         st.write("")
+    with col2:
         st.title("Transform Your Assessments, Let Efficiency Flow")
         st.title("          Automate the Routine, Focus on What You Know!")
 
