@@ -109,7 +109,7 @@ if selected_page == "Tools":
 
 # Home Page
 elif selected_page == "Home":
-    col1, col2, col3, col4 = st.columns([1, 2, 1])
+    col1, col2, col3= st.columns([1, 2, 1])
 
     with col2:
         st.image("./edited.png", width=300)
