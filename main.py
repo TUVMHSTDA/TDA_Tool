@@ -109,11 +109,12 @@ if selected_page == "Tools":
 
 # Home Page
 elif selected_page == "Home":
-    # Center the image and text within col2
-    st.image("./edited.png", width=300)
-    st.markdown("<h1 style='text-align: center;'>MHS TDA Tools</h1>", unsafe_allow_html=True)
-    st.markdown("<h6 style='text-align: center;'>by TÜV SÜD</h6>", unsafe_allow_html=True)
-    st.markdown("<h5 style='text-align: center;'>A tool that enables TD assessors to minimize mundane tasks, allowing them to focus more on their areas of expertise.</h5>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 1, 1])
+
+    with col2:
+        st.image("./edited.png", width=300)
+        st.title("MHS TDA Tools")
+        st.write("by TÜV SÜD")
 
 # Settings Page
 elif selected_page == "Settings":
