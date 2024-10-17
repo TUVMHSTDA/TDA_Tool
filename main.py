@@ -109,9 +109,9 @@ if selected_page == "Tools":
 
 # Home Page
 elif selected_page == "Home":
-    col1, col2, col3 = st.columns([1, 3, 1])
+    col1, col2, col3 = st.columns([1, 1, 2])
 
-    with col2:
+    with col3:
         st.image("./edited.png", width=300)
         st.title("MHS TDA Tools")
 
