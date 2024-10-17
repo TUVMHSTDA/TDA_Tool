@@ -122,7 +122,8 @@ elif selected_page == "Home":
         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
             <h1>Focus On Insights, Let AI Handle The Rest!</h1>
         </div>
-        """)
+        """,
+        unsafe_allow_html=True)
 
 # Settings Page
 elif selected_page == "Settings":
