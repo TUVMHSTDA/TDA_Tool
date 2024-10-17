@@ -119,7 +119,14 @@ elif selected_page == "Home":
 
     st.markdown(
         """
-        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <style>
+            .custom-font {
+                font-family: 'Lucida Console', monospace;
+                text-align: center;
+            }
+        </style>
+
+        <div class="custom-font">
             <h1>Focus On Insights, Let AI Handle The Rest!</h1>
         </div>
         """,
