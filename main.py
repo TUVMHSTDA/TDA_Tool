@@ -119,15 +119,8 @@ elif selected_page == "Home":
 
     st.markdown(
         """
-        <style>
-            .custom-font {
-                font-family: 'Lucida Console', monospace;
-                text-align: center;
-            }
-        </style>
-
-        <div class="custom-font">
-            <h1>Focus On Insights, Let AI Handle The Rest!</h1>
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <h3>A tool that enables TD assessors to minimize mundane tasks, allowing them to focus more on their areas of expertise.</h3>
         </div>
         """,
         unsafe_allow_html=True)
