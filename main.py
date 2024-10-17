@@ -5,11 +5,6 @@ from streamlit_tree_select import tree_select
 from pdf_extractor import extract_txt_list  # Daniel's script
 from export_data import main as export_td
 import fitz  # pymupdf
-from PIL import Image
-
-# Load the uploaded image
-image_path = "./edited.png"
-uploaded_image = Image.open(image_path)
 
 # Page configuration
 st.set_page_config(
@@ -114,25 +109,11 @@ if selected_page == "Tools":
 
 # Home Page
 elif selected_page == "Home":
-    # Create a centered layout
-    st.markdown(
-        """
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-        """,
-        unsafe_allow_html=True
-    )
-
-    # Display the image first
-    st.image(uploaded_image, width=300)
-    
-    # Add title after the image
-    st.markdown(
-        """
-            <h1 style="text-align: center;">MHS TDA Tools</h1>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    # Center the image and text within col2
+    st.image("./edited.png", width=300)
+    st.markdown("<h1 style='text-align: center;'>MHS TDA Tools</h1>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center;'>by TÜV SÜD</h6>", unsafe_allow_html=True)
+    st.markdown("<h5 style='text-align: center;'>A tool that enables TD assessors to minimize mundane tasks, allowing them to focus more on their areas of expertise.</h5>", unsafe_allow_html=True)
 
 # Settings Page
 elif selected_page == "Settings":
