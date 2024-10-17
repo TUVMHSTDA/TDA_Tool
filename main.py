@@ -117,8 +117,12 @@ elif selected_page == "Home":
         st.write("by TÜV SÜD")
         st.write("")
 
-    st.title("Transform Your Assessments, Let Efficiency Flow")
-    st.title("          Automate the Routine, Focus on What You Know!")
+    st.markdown(
+        """
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <h1>Focus On Insights, Let AI Handle The Rest!</h1>
+        </div>
+        """)
 
 # Settings Page
 elif selected_page == "Settings":
