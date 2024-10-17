@@ -112,10 +112,10 @@ elif selected_page == "Home":
     st.markdown(
         """
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-            <img src="data:image/png;base64,{}" alt="Logo" width="300">
+            <img src="./edited.png" alt="Logo" width="300">
             <h1 style="text-align: center;">MHS TDA Tools</h1>
         </div>
-        """.format(base64.b64encode(open("./edited.png", "rb").read()).decode()),
+        """,
         unsafe_allow_html=True
     )
 
