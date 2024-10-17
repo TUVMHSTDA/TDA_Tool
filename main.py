@@ -109,15 +109,11 @@ if selected_page == "Tools":
 
 # Home Page
 elif selected_page == "Home":
-    st.markdown(
-        """
-        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-            <img src='./edited.png' width='300' />
-            <h1>MHS TDA Tools</h1>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+        st.image("./edited.png", width=300)
+        st.title("MHS TDA Tools")
 
 # Settings Page
 elif selected_page == "Settings":
