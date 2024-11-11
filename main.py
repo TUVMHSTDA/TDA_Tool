@@ -23,7 +23,7 @@ class TDAApp:
         )
 
     def display_home(self):
-        col1, col2, col3 = st.columns([1, 2, 1])
+        col1, col2, col3 = st.columns([1, 1.5, 1])
         with col2:
             st.image("./edited.png", width=300)
             st.title("MHS TDA Tools")
