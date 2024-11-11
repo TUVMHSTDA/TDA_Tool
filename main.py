@@ -26,7 +26,7 @@ class TDAApp:
         col1, col2, col3 = st.columns([1, 1.5, 1])
         with col2:
             st.image("./edited.png", width=300)
-            st.title("MHS TDA Tools")
+            st.title("MHS TDA Tool")
             st.write("by TÜV SÜD")
 
     def display_settings(self):
