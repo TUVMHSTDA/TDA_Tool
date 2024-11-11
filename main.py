@@ -6,6 +6,7 @@ from pdf_extractor import extract_txt_list  # Daniel's script
 from export_data import main as export_td
 import fitz  # pymupdf
 import time  # Required for simulating progress
+
 from ocr_check_tool import OCRCheckTool
 from cear_export_tool import CEARExportTool
 
@@ -22,10 +23,10 @@ class TDAApp:
         )
 
     def display_home(self):
-        col1, col2, col3 = st.columns([1, 1, 1])
+        col1, col2, col3 = st.columns([1, 0.5, 1])
         with col2:
             st.image("./edited.png", width=300)
-            st.title("MHSTDA Tools")
+            st.title("MHS TDA Tools")
             st.write("by TÜV SÜD")
 
     def display_settings(self):
