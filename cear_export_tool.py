@@ -81,15 +81,19 @@ class CEARExportTool:
 
         uploaded_word_file = st.file_uploader("Upload Completed Word Document", type=["docx"])
         if uploaded_word_file is not None:
-            if st.session_state.word_file_path != uploaded_word_file.name:
-                st.session_state.word_file_path = f"/tmp/{uploaded_word_file.name}"
-        st.text_input("Completed Word Document Directory", value=st.session_state.word_file_path, disabled=True)
+            # Save uploaded file to a temporary location
+            temp_word_path = os.path.join(tempfile.gettempdir(), uploaded_word_file.name)
+            with open(temp_word_path, "wb") as f:
+                f.write(uploaded_word_file.getbuffer())
+            st.session_state.word_file_path = temp_word_path
 
         uploaded_cear_template = st.file_uploader("Upload CEAR Template", type=["docx"])
         if uploaded_cear_template is not None:
-            if st.session_state.cear_template_path != uploaded_cear_template.name:
-                st.session_state.cear_template_path = f"/tmp/{uploaded_cear_template.name}"
-        st.text_input("CEAR Template Directory", value=st.session_state.cear_template_path, disabled=True)
+            # Save uploaded file to a temporary location
+            temp_template_path = os.path.join(tempfile.gettempdir(), uploaded_cear_template.name)
+            with open(temp_template_path, "wb") as f:
+                f.write(uploaded_cear_template.getbuffer())
+            st.session_state.cear_template_path = temp_template_path
 
         if st.button("Export"):
             self.export_with_progress()
@@ -101,9 +105,12 @@ class CEARExportTool:
             st.write(f"Step {i}/9: Processing...")
             time.sleep(0.5)
         
-        if st.session_state.word_file_path and st.session_state.cear_template_path:
+        # Check if files are correctly saved in session state
+        if st.session_state.get("word_file_path") and st.session_state.get("cear_template_path"):
             self.auto_populate()
             st.success("Export complete!")
+        else:
+            st.error("Please upload both documents before exporting.")
 
     def auto_populate(self):
         source_doc_path = st.session_state.word_file_path
