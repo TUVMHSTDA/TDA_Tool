@@ -37,9 +37,9 @@ class CEARExportTool:
 
     def export_with_progress(self):
         progress_bar = st.progress(0)
-        for i in range(1, 9):
+        for i in range(1, 10):
             progress_bar.progress(i * 10)
-            st.write(f"Step {i}/9: Processing...")
+            st.write(f"Step {i}/10: Processing...")
             time.sleep(0.5)
         
         # Start document processing
@@ -51,7 +51,7 @@ class CEARExportTool:
             st.download_button(
                 label="Download Completed Document",
                 data=file,
-                file_name="Evaluation_Assessment_Report_Filled.docx",
+                file_name="E302037_MDR - Clinical Evaluation Assessment Report (CEAR)_Filled.docx",
                 mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             )
 
