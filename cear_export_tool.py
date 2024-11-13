@@ -37,7 +37,7 @@ class CEARExportTool:
 
     def export_with_progress(self):
         progress_bar = st.progress(0)
-        for i in range(1, 10):
+        for i in range(1, 9):
             progress_bar.progress(i * 10)
             st.write(f"Step {i}/9: Processing...")
             time.sleep(0.5)
