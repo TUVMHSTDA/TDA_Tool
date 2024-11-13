@@ -11,6 +11,8 @@ class CEARExportTool:
             st.session_state.word_file_path = ""
         if "cear_template_path" not in st.session_state:
             st.session_state.cear_template_path = ""
+        if "output_path" not in st.session_state:
+            st.session_state.output_path = ""
 
     def run(self):
         st.title("CEAR Export Tool")
@@ -43,6 +45,15 @@ class CEARExportTool:
         # Start document processing
         self.process_documents()
         st.success("Export complete!")
+        
+        # Auto-download button for the output document
+        with open(st.session_state.output_path, "rb") as file:
+            st.download_button(
+                label="Download Completed Document",
+                data=file,
+                file_name="Evaluation_Assessment_Report_Filled.docx",
+                mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            )
 
     def process_documents(self):
         # Load the documents
