@@ -18,7 +18,7 @@ class CEARExportTool:
         st.title("CEAR Export Tool")
         st.write("Upload the completed TDAR document and CEAR template to proceed with the export.")
 
-        uploaded_word_file = st.file_uploader("Upload Completed Word Document", type=["docx"])
+        uploaded_word_file = st.file_uploader("Upload Completed TDAR Document", type=["docx"])
         if uploaded_word_file is not None:
             st.session_state.word_file_path = f"/tmp/{uploaded_word_file.name}"
             with open(st.session_state.word_file_path, "wb") as f:
@@ -105,7 +105,6 @@ class CEARExportTool:
         output_path = "/tmp/Evaluation_Assessment_Report_Filled.docx"
         template_doc.save(output_path)
         st.session_state.output_path = output_path
-        st.write("Document saved successfully!")
 
 # Utility functions integrated from auto_populate.py
 def replace_content_control(element, namespaces=None):
