@@ -11,13 +11,13 @@ class OCRCheckTool:
     def __init__(self):
         pass
 
-    def needs_ocr(self, uploaded_file):
+    def is_not_ocr(self, uploaded_file):
         if uploaded_file.name.endswith(".pdf"):
             doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
             for page_num in range(len(doc)):
                 page = doc.load_page(page_num)
                 text = page.get_text()
-                if not text.strip():  # If no text is detected
+                if not text.strip():  # If no text is detected (NOT FOR IMAGES)
                     return True
             return False
         else:
@@ -35,7 +35,7 @@ class OCRCheckTool:
         if uploaded_files:
             st.write("Performing OCR check on uploaded files:")
             for uploaded_file in uploaded_files:
-                ocr_needed = self.needs_ocr(uploaded_file)
+                ocr_needed = self.is_not_ocr(uploaded_file)
                 if ocr_needed is None:
                     continue  # Skip unsupported files
                 status_message = "Failed" if ocr_needed else "Passed"
